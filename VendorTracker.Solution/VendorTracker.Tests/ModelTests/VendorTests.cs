@@ -18,4 +18,12 @@ public class VendorTests
     Vendor two = new(expected);
     Assert.AreEqual(two.Name, expected);
   }
+  [TestMethod]
+  public void Vendor_SetName_Void()
+  {
+    Vendor three = new("two");
+    string expected = "three";
+    three.Name = expected;
+    Assert.AreEqual(three.Name, expected);
+  }
 }
