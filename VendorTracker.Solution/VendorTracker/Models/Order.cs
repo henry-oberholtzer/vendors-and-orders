@@ -5,7 +5,7 @@ public class Order {
   public string Description { get; set; }
   public int Price { get; set; }
 
-  public int Id { get; }
+  public string Id { get; }
   private static List<Order> _instances = new (){};
   public Order(string title, int price, string description = "No description available.")
   {
@@ -13,7 +13,7 @@ public class Order {
     Description = description;
     Price = price;
     _instances.Add(this);
-    Id = _instances.Count;
+    Id = Guid.NewGuid().ToString();
   }
   public static List<Order> GetAll()
   {
@@ -25,8 +25,14 @@ public class Order {
     _instances.Clear();
   }
 
-  public static Order Find(int id)
+  public static Order Find(string id)
   {
-    return _instances[id - 1];
+    return _instances.Single(order => order.Id == id);
+  }
+
+    public static void Delete(string id)
+  {
+    Order orderToRemove = _instances.Single(order => order.Id == id);
+    _instances.Remove(orderToRemove);
   }
 }

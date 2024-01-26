@@ -73,8 +73,9 @@ public class OrderTests : IDisposable
   {
         _ = new Order("one", 1);
     Order two = new("two", 2);
-    int expected = 2;
+    string expected = two.Id;
     Assert.AreEqual(two.Id, expected);
+    Assert.IsTrue(Guid.TryParse(expected, out _));
   }
   [TestMethod]
   public void Order_FindById_Order()
@@ -82,7 +83,7 @@ public class OrderTests : IDisposable
           _ = new Order("one", 1);
       _ = new Order("two", 2);
       Order three = new("three", 3);
-      Assert.AreEqual(Order.Find(3), three);
+      Assert.AreEqual(Order.Find(three.Id), three);
   }
   [TestMethod]
   public void Order_ClearAll_Void()
