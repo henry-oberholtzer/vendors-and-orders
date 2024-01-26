@@ -118,7 +118,7 @@ public class VendorTests : IDisposable
       CollectionAssert.AreEqual(expected, Vendor.GetAll());
   }
   [TestMethod]
-  public void Vendor_FindByName_Vendor()
+  public void Vendor_FindByName_IEnumerable()
   {
     string query = "look for me";
     Vendor result = new(query);
@@ -127,7 +127,7 @@ public class VendorTests : IDisposable
     Assert.AreEqual(results.First(), result);
   }
   [TestMethod]
-    public void Vendor_FindByDescription_Vendor()
+    public void Vendor_FindByDescription_IEnumerable()
   {
     string query = "look for me";
     Vendor result = new("one", query);
