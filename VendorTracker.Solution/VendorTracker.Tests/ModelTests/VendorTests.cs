@@ -108,13 +108,23 @@ public class VendorTests : IDisposable
   [TestMethod]
   public void Vendor_DeleteAddGetAll_VendorList()
   {
-      _ = new Vendor("one");
-      _ = new Vendor("two");
-      Vendor three = new Vendor("three");
-      Vendor.Delete(2);
+      Vendor one = new Vendor("one");
+      Vendor two = new Vendor("two");
+      _ = new Vendor("three");
+      Vendor.Delete(3);
       Vendor four = new("four");
-      Vendor.Delete(1);
-      List<Vendor> expected = new(){three, four};
+      Vendor.Delete(four.Id);
+      List<Vendor> expected = new(){one, two };
       CollectionAssert.AreEqual(expected, Vendor.GetAll());
+  }
+  [TestMethod]
+  public void Vendor_FindByName_Vendor()
+  {
+    string query = "look for me";
+    Vendor result = new(query);
+    Vendor two = new("two", "i am not the one");
+    IEnumerable<Vendor> results = Vendor.FindByName(query);
+    Assert.AreEqual(results.First(), result);
+
   }
 }

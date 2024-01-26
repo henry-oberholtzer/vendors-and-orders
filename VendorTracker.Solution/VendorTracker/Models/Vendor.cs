@@ -1,3 +1,5 @@
+using System.Reflection;
+
 namespace VendorTracker.Models;
 
 public class Vendor
@@ -28,7 +30,12 @@ public class Vendor
     IEnumerable<Vendor> results = _instances.Where(instance => instance.Id == id);
     return results.First();
   }
-  
+  public static IEnumerable<Vendor> FindByName(string query)
+  {
+    IEnumerable<Vendor> results = _instances.Where(instance => instance.Name == query);
+    return results;
+  }
+
   public static void Delete(int id)
   {
     _instances.RemoveAt(id - 1);
