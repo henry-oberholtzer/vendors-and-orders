@@ -3,8 +3,13 @@ using VendorTracker.Models;
 namespace VendorTracker.Tests;
 
 [TestClass]
-public class VendorTests
+public class VendorTests : IDisposable
 {
+  public void Dispose()
+  {
+    Vendor.ClearAll();
+  }
+  
   [TestMethod]
   public void Vendor_ShouldCreateAnInstanceOfVendor_Vendor()
   {
@@ -32,5 +37,20 @@ public class VendorTests
     string expected = "abc";
     Vendor four = new("four", expected);
     Assert.AreEqual(four.Description, expected);
+  }
+  [TestMethod]
+  public void Vendor_GetDescriptionDefault_String()
+  {
+    string expected = "No description available.";
+    Vendor five = new("five");
+    Assert.AreEqual(five.Description, expected);
+  }
+  [TestMethod]
+  public void Vendor_GetAll_ListVendor()
+  {
+    Vendor six = new("six");
+    Vendor seven = new("seven");
+    List<Vendor> expected = new(){ six, seven };
+    CollectionAssert.AreEqual(expected, Vendor.GetAll());
   }
 }
