@@ -25,6 +25,12 @@ public class Vendor
   }
   public static Vendor Find(int id)
   {
-    return _instances[id - 1];
+    IEnumerable<Vendor> results = _instances.Where(instance => instance.Id == id);
+    return results.First();
+  }
+  
+  public static void Delete(int id)
+  {
+    _instances.RemoveAt(id - 1);
   }
 }

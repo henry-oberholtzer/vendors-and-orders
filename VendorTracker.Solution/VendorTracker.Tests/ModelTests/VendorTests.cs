@@ -86,4 +86,35 @@ public class VendorTests : IDisposable
       Assert.AreEqual(Vendor.Find(3), three);
 
   }
+  [TestMethod]
+  public void Vendor_Delete_Void()
+  {
+      _ = new Vendor("one");
+      Vendor two = new("two");
+      Vendor three = new("three");
+      List<Vendor> expected = new(){ two, three };
+      Vendor.Delete(1);
+      CollectionAssert.AreEqual(Vendor.GetAll(), expected);
+  }
+  [TestMethod]
+  public void Vendor_DeleteAndFind_Vendor()
+  {
+      _ = new Vendor("one");
+      Vendor two = new("two");
+      _ = new Vendor("three");
+      Vendor.Delete(1);
+      Assert.AreEqual(Vendor.Find(2), two);
+  }
+  [TestMethod]
+  public void Vendor_DeleteAddGetAll_VendorList()
+  {
+      _ = new Vendor("one");
+      _ = new Vendor("two");
+      Vendor three = new Vendor("three");
+      Vendor.Delete(2);
+      Vendor four = new("four");
+      Vendor.Delete(1);
+      List<Vendor> expected = new(){three, four};
+      CollectionAssert.AreEqual(expected, Vendor.GetAll());
+  }
 }
