@@ -22,7 +22,6 @@ By Henry Oberholtzer
 - User should be able to delete a specific `Order` instance within a `Vendor`
 - User should be able to delete all `Order` instances within a vendor, without deleting the vendor
 - Orders should contain properties for a title, description, the cost of the order
-- User should be able to 
 
 
 ## Technical requirements
