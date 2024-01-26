@@ -65,6 +65,7 @@ VendorTracker.Solution/
 │  │  │  ├─ _Layout.cshtml
 │  │  │  ├─ Header.cshtml
 │  ├─ VendorTracker.csproj
+│  ├─ Program.cs
 ├─ VendorTracker.Tests/
 │  ├─ ModelTests/
 │  │  ├─ VendorTests.cs
