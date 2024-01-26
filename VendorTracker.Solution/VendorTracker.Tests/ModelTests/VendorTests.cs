@@ -43,7 +43,7 @@ public class VendorTests : IDisposable
     Vendor three = new("two", "def");
     string expected = "boing";
     three.Description = expected;
-    Assert.AreEqual(three.Name, expected);
+    Assert.AreEqual(three.Description, expected);
   }
   [TestMethod]
   public void Vendor_GetDescriptionDefault_String()
