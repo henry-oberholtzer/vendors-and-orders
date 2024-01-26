@@ -1,5 +1,3 @@
-using System.Reflection;
-
 namespace VendorTracker.Models;
 
 public class Vendor
