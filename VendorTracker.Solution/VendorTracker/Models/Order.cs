@@ -30,6 +30,12 @@ public class Order {
     return _instances.Single(order => order.Id == id);
   }
 
+  public static IEnumerable<Order> FindByTitle(string query)
+  {
+    IEnumerable<Order> results = _instances.Where(instance => instance.Title == query);
+    return results;
+  }
+
     public static void Delete(string id)
   {
     Order orderToRemove = _instances.Single(order => order.Id == id);

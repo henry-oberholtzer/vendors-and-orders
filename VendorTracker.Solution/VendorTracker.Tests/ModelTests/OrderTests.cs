@@ -97,11 +97,18 @@ public class OrderTests : IDisposable
   [TestMethod]
   public void Order_Delete_Void()
   {
-
+    Order six = new("six", 6);
+    Order seven = new("seven", 7);
+    Order.Delete(six.Id);
+    List<Order> expected = new(){ seven };
+    CollectionAssert.AreEqual(Order.GetAll(), expected);
   }
   [TestMethod]
-  public void Order_FindByName_Order()
+  public void Order_FindByTitle_IEnumberableOrder()
   {
-
+    Order six = new("six", 6);
+    Order seven = new("seven", 7);
+    Order.FindByTitle("six");
+    Assert.AreEqual(Order.FindByTitle("six").First(), six);
   }
 }
