@@ -135,4 +135,16 @@ public class VendorTests : IDisposable
     IEnumerable<Vendor> results = Vendor.FindByDescription(query);
     Assert.AreEqual(results.First(), result);
   }
+
+  [TestMethod]
+  public void AddOrder_AssociatesOrderWithVendor_OrderList()
+  {
+    Order five = new("five", 10);
+    List<Order> expected = new(){ five };
+    Vendor six = new("six");
+    six.AddOrder(five);
+    List<Order> result = six.Orders;
+    CollectionAssert.AreEqual(expected, result);
+  }
+
 }

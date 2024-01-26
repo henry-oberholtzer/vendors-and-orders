@@ -4,7 +4,7 @@ public class Vendor
 {
   public string Name { get; set; }
   public string Description { get; set; }
-
+  public List<Order> Orders { get; set; }
   public int Id { get; }
   private static List<Vendor> _instances = new(){};
   public Vendor (string name, string description = "No description available.")
@@ -12,7 +12,12 @@ public class Vendor
     Name = name;
     Description = description;
     _instances.Add(this);
+    Orders = new List<Order>{};
     Id = _instances.Count;
+  }
+  public void AddOrder(Order order)
+  {
+    Orders.Add(order);
   }
 
   public static List<Vendor> GetAll()
