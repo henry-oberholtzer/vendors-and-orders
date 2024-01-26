@@ -35,6 +35,11 @@ public class Vendor
     IEnumerable<Vendor> results = _instances.Where(instance => instance.Name == query);
     return results;
   }
+    public static IEnumerable<Vendor> FindByDescription(string query)
+  {
+    IEnumerable<Vendor> results = _instances.Where(instance => instance.Description == query);
+    return results;
+  }
 
   public static void Delete(int id)
   {

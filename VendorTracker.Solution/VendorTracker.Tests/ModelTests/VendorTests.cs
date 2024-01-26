@@ -125,6 +125,14 @@ public class VendorTests : IDisposable
     Vendor two = new("two", "i am not the one");
     IEnumerable<Vendor> results = Vendor.FindByName(query);
     Assert.AreEqual(results.First(), result);
-
+  }
+  [TestMethod]
+    public void Vendor_FindByDescription_Vendor()
+  {
+    string query = "look for me";
+    Vendor result = new("one", query);
+    Vendor two = new("two", "i am not the one");
+    IEnumerable<Vendor> results = Vendor.FindByDescription(query);
+    Assert.AreEqual(results.First(), result);
   }
 }
