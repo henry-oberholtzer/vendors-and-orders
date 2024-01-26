@@ -23,4 +23,8 @@ public class Vendor
   {
     _instances.Clear();
   }
+  public static Vendor Find(int id)
+  {
+    return _instances[id - 1];
+  }
 }

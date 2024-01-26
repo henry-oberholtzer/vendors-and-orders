@@ -72,9 +72,18 @@ public class VendorTests : IDisposable
   [TestMethod]
   public void Vendor_GetId_Int()
   {
-    Vendor one = new("one");
+    _ = new Vendor("one");
     Vendor two = new("two");
     int expected = 2;
     Assert.AreEqual(two.Id, expected);
+  }
+  [TestMethod]
+  public void Vendor_FindById_Vendor()
+  {
+      _ = new Vendor("one");
+      _ = new Vendor("two");
+      Vendor three = new("three");
+      Assert.AreEqual(Vendor.Find(3), three);
+
   }
 }
