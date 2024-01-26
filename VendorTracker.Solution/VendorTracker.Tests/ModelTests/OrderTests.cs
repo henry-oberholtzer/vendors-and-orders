@@ -3,8 +3,12 @@ using VendorTracker.Models;
 namespace VendorTracker.Tests;
 
 [TestClass]
-public class OrderTests
+public class OrderTests : IDisposable
 {
+  public void Dispose()
+  {
+    Order.ClearAll();
+  }
   [TestMethod]
   public void Order_CreateAnInstanceOfOrder_Order()
   {
@@ -63,20 +67,31 @@ public class OrderTests
     seven.Price = expected;
     Assert.AreEqual(seven.Price, expected);
   }
+
   [TestMethod]
   public void Order_GetId_Order()
   {
-
+        _ = new Order("one", 1);
+    Order two = new("two", 2);
+    int expected = 2;
+    Assert.AreEqual(two.Id, expected);
   }
   [TestMethod]
   public void Order_FindById_Order()
   {
-
+          _ = new Order("one", 1);
+      _ = new Order("two", 2);
+      Order three = new("three", 3);
+      Assert.AreEqual(Order.Find(3), three);
   }
   [TestMethod]
   public void Order_ClearAll_Void()
   {
-
+    Order six = new("six", 6);
+    Order seven = new("seven", 7);
+    List<Order> expected = new(){};
+    Order.ClearAll();
+    CollectionAssert.AreEqual(expected, Order.GetAll());
   }
   [TestMethod]
   public void Order_Delete_Void()

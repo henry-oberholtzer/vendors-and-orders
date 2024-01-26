@@ -70,11 +70,11 @@ public class VendorTests : IDisposable
     CollectionAssert.AreEqual(expected, Vendor.GetAll());
   }
   [TestMethod]
-  public void Vendor_GetId_Int()
+  public void Vendor_GetId_String()
   {
     _ = new Vendor("one");
     Vendor two = new("two");
-    int expected = 2;
+    string expected = two.Id;
     Assert.AreEqual(two.Id, expected);
   }
   [TestMethod]
@@ -83,35 +83,37 @@ public class VendorTests : IDisposable
       _ = new Vendor("one");
       _ = new Vendor("two");
       Vendor three = new("three");
-      Assert.AreEqual(Vendor.Find(3), three);
+      Assert.AreEqual(Vendor.Find(three.Id), three);
 
   }
   [TestMethod]
   public void Vendor_Delete_Void()
   {
-      _ = new Vendor("one");
+      Vendor one = new("one");
       Vendor two = new("two");
       Vendor three = new("three");
+      string idToDelete = one.Id;
       List<Vendor> expected = new(){ two, three };
-      Vendor.Delete(1);
+      Vendor.Delete(idToDelete);
       CollectionAssert.AreEqual(Vendor.GetAll(), expected);
   }
   [TestMethod]
   public void Vendor_DeleteAndFind_Vendor()
   {
-      _ = new Vendor("one");
+      Vendor one = new("one");
       Vendor two = new("two");
-      _ = new Vendor("three");
-      Vendor.Delete(1);
-      Assert.AreEqual(Vendor.Find(2), two);
+      Vendor three = new("three");
+      string id = two.Id.ToString();
+      Vendor.Delete(id);
+      Assert.AreEqual(Vendor.Find(three.Id), three);
   }
   [TestMethod]
   public void Vendor_DeleteAddGetAll_VendorList()
   {
-      Vendor one = new Vendor("one");
-      Vendor two = new Vendor("two");
-      _ = new Vendor("three");
-      Vendor.Delete(3);
+      Vendor one = new("one");
+      Vendor two = new("two");
+      Vendor three = new("three");
+      Vendor.Delete(three.Id);
       Vendor four = new("four");
       Vendor.Delete(four.Id);
       List<Vendor> expected = new(){one, two };
