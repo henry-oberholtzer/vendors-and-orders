@@ -38,6 +38,13 @@ public class VendorTests : IDisposable
     Vendor four = new("four", expected);
     Assert.AreEqual(four.Description, expected);
   }
+    public void Vendor_SetDescription_Void()
+  {
+    Vendor three = new("two", "def");
+    string expected = "boing";
+    three.Description = expected;
+    Assert.AreEqual(three.Name, expected);
+  }
   [TestMethod]
   public void Vendor_GetDescriptionDefault_String()
   {
@@ -52,5 +59,22 @@ public class VendorTests : IDisposable
     Vendor seven = new("seven");
     List<Vendor> expected = new(){ six, seven };
     CollectionAssert.AreEqual(expected, Vendor.GetAll());
+  }
+  [TestMethod]
+    public void Vendor_ClearAll_Void()
+  {
+    Vendor six = new("six");
+    Vendor seven = new("seven");
+    List<Vendor> expected = new(){};
+    Vendor.ClearAll();
+    CollectionAssert.AreEqual(expected, Vendor.GetAll());
+  }
+  [TestMethod]
+  public void Vendor_GetId_Int()
+  {
+    Vendor one = new("one");
+    Vendor two = new("two");
+    int expected = 2;
+    Assert.AreEqual(two.Id, expected);
   }
 }
