@@ -5,15 +5,19 @@
 }
 
 <body>
-  <form action="/vendors/@Model.Id/orders/new" method="post">
+  <form action="/vendors/@Model.Id/" method="post">
+    <input id="vendorId" name="vendorId" type="hidden" value="@Model.Id">
     <div class="mb-3">
-      <label for="name" class="form-label">Name</label>
-      <input type="text" class="form-control" id="name" name="name" placeholder="VendingMan37">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" class="form-control" id="title" name="title">
+    </div>
+    <div class="mb-3">
+      <label for="price" class="form-label">Price</label>
+      <input type="numeric" class="form-control" id="title" name="price" placeholder="Order Title">
     </div>
     <div class="mb-3">
       <label for="description" class="form-label">Description (Optional)</label>
-      <input type="text-area" class="form-control" id="description" name="description"
-        placeholder="Lots of items available...">
+      <input type="text-area" class="form-control" id="description" name="description">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>

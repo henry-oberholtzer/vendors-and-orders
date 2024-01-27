@@ -18,7 +18,7 @@
         @if (@Model.Orders.Count == 0)
         {
           <button type="button" class="list-group-item list-group-item-action disabled">No orders...</button>
-          <a href="/vendors/@Model.Id/order/new">
+          <a href="/vendors/@Model.Id/orders/new">
             <button type="button" class="list-group-item list-group-item-action btn-success">Would you like to add
               one?</button>
           </a>
@@ -27,7 +27,7 @@
         {
           @foreach (Order order in @Model.Orders)
           {
-            <a href="/vendors/@Model.Id/order/@order.Id">
+            <a href="/vendors/@Model.Id/orders/@order.Id">
               <button type="button" class="list-group-item list-group-item-action">@order.Title</button>
             </a>
           }
