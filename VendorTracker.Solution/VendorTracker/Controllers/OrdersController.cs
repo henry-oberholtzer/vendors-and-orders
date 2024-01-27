@@ -24,7 +24,7 @@ public class OrdersController : Controller
     string titleClean = title.Trim();
     if(int.TryParse(price, out int priceNum) && titleClean.Length > 0)
     {
-          Order newOrder = new(title, priceNum, description);
+          Order newOrder = new(titleClean, priceNum, description);
           Vendor.Find(vendorId).AddOrder(newOrder);
           RouteValueDictionary route = new(){
             {"id", vendorId},
@@ -34,17 +34,18 @@ public class OrdersController : Controller
     }
     else
     {
-      RouteValueDictionary route = new(){{"id", vendorId}};
+      RouteValueDictionary route = new(){
+        {"id", vendorId},
+      };
       return RedirectToAction("New", route);
     }
   }
 
-
   [HttpGet("/vendors/{id}/orders/{orderId}")]
-  public ActionResult Show(string orderId)
+  public ActionResult Show(string id, string orderId)
   {
-    Order target = Order.Find(orderId);
-    return View(target);
+    Order targetOrder = Order.Find(orderId);
+    return View(targetOrder);
   }
 
 };

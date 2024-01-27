@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+@{
+  Layout = "_Layout";
+}
+
+<body>
+  @using VendorTracker.Models;
+  <ol class="list-group list-group-numbered">
+    @if (Model.Orders.Count == 0)
+    {
+
+      <a href="/vendors/new"
+        class="list-group-item d-flex justify-content-between align-items-start list-group-item-action">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold">No Orders Found</div>
+          Would you like to add one?
+        </div>
+      </a>
+    }
+    else
+    {
+      @foreach (Order order in Model.Orders)
+      {
+        <a href="/vendors/@order.Id"
+          class="list-group-item d-flex justify-content-between align-items-start list-group-item-action">
+          <div class="ms-2 me-auto">
+            <div class="fw-bold">@order.Title</div>
+            @order.Description
+          </div>
+          <span class="badge bg-primary rounded-pill">@order.Price</span>
+        </a>
+      }
+    }
+  </ol>
+</body>

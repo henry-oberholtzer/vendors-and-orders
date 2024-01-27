@@ -9,11 +9,24 @@
 
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title">@Model.Name</h5>
+      <h5 class="card-title">Vendor: @Model.Name</h5>
       <p class="card-text">@Model.Description</p>
-      <form action="/vendors/{@Model.Id}/delete" method="post">
-        <button class="card-link text-danger">Delete</button>
-      </form>
+      <div class="mb-3">
+        <form class="" action="/vendors/@Model.Id/orders/new" method="get">
+          <button class="btn btn-success">Add Order</button>
+        </form>
+        <form action="/vendors/@Model.Id/delete" method="post">
+          <button class="btn btn-danger">Delete Vendor</button>
+        </form>
+      </div>
+      @if (@Model.Orders.Count == 1)
+      {
+        <h5 class="card-title">1 Order</h5>
+      }
+      else
+      {
+        <h5 class="card-title">@Model.Orders.Count Orders</h5>
+      }
       <ul class="list-group">
         @if (@Model.Orders.Count == 0)
         {
@@ -27,8 +40,7 @@
         {
           @foreach (Order order in @Model.Orders)
           {
-            <a href="/vendors/@Model.Id/orders/@order.Id">
-              <button type="button" class="list-group-item list-group-item-action">@order.Title</button>
+            <a href="/vendors/@Model.Id/orders/@order.Id" class="list-group-item list-group-item-action">@order.Title
             </a>
           }
         }

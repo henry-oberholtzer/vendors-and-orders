@@ -7,13 +7,13 @@
 <body>
   @using VendorTracker.Models
 
-  <div class="card" style="width: 18rem;">
+  <div class="card">
     <div class="card-body">
-      <h5 class="card-title">@Model.Title</h5>
+      <h5 class="card-title">Order: @Model.Title <span class="badge bg-primary rounded-pill">$@Model.Price</span></h5>
       <p class="card-text">@Model.Description</p>
-      <form action="/vendors/@Model.Id/delete" method="post">
-        <button class="card-link text-danger">Delete</button>
-      </form>
-    </div>
-  </div>
+      <div class="mb-3">
+        <form action="/vendors/@Model.vendorId/orders/@Model.Id/delete" method="post">
+          <button class="btn btn-danger">Delete Order</button>
+        </form>
+      </div>
 </body>

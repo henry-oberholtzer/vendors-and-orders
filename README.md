@@ -32,6 +32,9 @@ By Henry Oberholtzer
 - GET and POST requests and responses are used correctly
 - MVC routes follow RESTful requirements
 
+## Features not tested
+- Vendor.FindOrder(string id)
+- Order.VendorId
 
 ## Project Structure
 

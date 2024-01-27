@@ -5,6 +5,7 @@ public class Order {
   public string Description { get; set; }
   public int Price { get; set; }
 
+  public string VendorId { get; set; }
   public string Id { get; }
   private static List<Order> _instances = new (){};
   public Order(string title, int price, string description = "No description available.")
@@ -12,6 +13,7 @@ public class Order {
     Title = title;
     Description = description;
     Price = price;
+    VendorId = "";
     _instances.Add(this);
     Id = Guid.NewGuid().ToString();
   }

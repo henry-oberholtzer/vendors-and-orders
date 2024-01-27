@@ -17,7 +17,13 @@ public class Vendor
   }
   public void AddOrder(Order order)
   {
+    order.VendorId = Id;
     Orders.Add(order);
+  }
+
+  public Order FindOrder(string id)
+  {
+    return Orders.Single(order => order.Id == id);
   }
 
   public static List<Vendor> GetAll()
@@ -32,6 +38,9 @@ public class Vendor
   {
     return _instances.Single(vendor => vendor.Id == id);
   }
+
+
+
   public static IEnumerable<Vendor> FindByName(string query)
   {
     IEnumerable<Vendor> results = _instances.Where(instance => instance.Name == query);

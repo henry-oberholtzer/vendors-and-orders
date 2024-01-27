@@ -5,7 +5,8 @@
 }
 
 <body>
-  <form action="/vendors/@Model.Id/" method="post">
+  <h5>Creating an order for vendor '@Model.Name'</h5>
+  <form action="/vendors/@Model.Id/orders" method="post">
     <input id="vendorId" name="vendorId" type="hidden" value="@Model.Id">
     <div class="mb-3">
       <label for="title" class="form-label">Title</label>
