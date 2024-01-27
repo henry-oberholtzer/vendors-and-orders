@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+@{
+  Layout = "_Layout";
+}
+
+<body>
+  @using VendorTracker.Models
+
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">@Model.Name</h5>
+      <p class="card-text">@Model.Description</p>
+      <form action="/vendors/{@Model.Id}/delete" method="post">
+        <button class="card-link text-danger">Delete</button>
+      </form>
+      <ul class="list-group">
+        @if (@Model.Orders.Count == 0)
+        {
+          <button type="button" class="list-group-item list-group-item-action disabled">No orders...</button>
+          <a href="/vendors/@Model.Id/order/new">
+            <button type="button" class="list-group-item list-group-item-action btn-success">Would you like to add
+              one?</button>
+          </a>
+        }
+        else
+        {
+          @foreach (Order order in @Model.Orders)
+          {
+            <a href="/vendors/@Model.Id/order/@order.Id">
+              <button type="button" class="list-group-item list-group-item-action">@order.Title</button>
+            </a>
+          }
+        }
+      </ul>
+
+    </div>
+  </div>
+</body>
