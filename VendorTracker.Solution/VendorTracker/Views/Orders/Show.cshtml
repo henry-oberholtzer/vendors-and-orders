@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+@{
+  Layout = "_Layout";
+}
+
+<body>
+  @using VendorTracker.Models
+
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">@Model.Title</h5>
+      <p class="card-text">@Model.Description</p>
+      <form action="/vendors/@Model.Id/delete" method="post">
+        <button class="card-link text-danger">Delete</button>
+      </form>
+    </div>
+  </div>
+</body>

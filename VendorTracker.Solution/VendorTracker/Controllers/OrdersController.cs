@@ -5,7 +5,6 @@ namespace VendorTracker.Controllers;
 
 public class OrdersController : Controller
 {
-
   [HttpGet("/vendors/{id}/orders/new")]
   public ActionResult New(string id)
   {
@@ -14,6 +13,12 @@ public class OrdersController : Controller
         { "Id", id }
     };
     return View(Model);
+  }
+  [HttpGet("/vendors/{id}/orders/{orderId}")]
+  public ActionResult Show(string orderId)
+  {
+    Order target = Order.Find(orderId);
+    return View(target);
   }
 }
 

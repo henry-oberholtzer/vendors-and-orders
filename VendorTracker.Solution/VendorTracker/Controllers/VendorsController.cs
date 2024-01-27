@@ -39,17 +39,4 @@ public class VendorsController : Controller
     Vendor.Delete(id);
     return RedirectToAction("Index");
   }
-
-  [HttpGet("/vendors/{id}/orders/new")]
-  {
-
-  }
-  [HttpPost("/vendors/{id}/orders")]
-  public ActionResult CreateOrder(string id, string title, int price, string description)
-  {
-    Order newOrder = new(title, price, description);
-    Vendor.AddOrder(newOrder);
-    RouteValueDictionary route = new(){{"id", newVendor.Id}};
-    return RedirectToAction("Show", route); 
-  }
 }
