@@ -9,11 +9,12 @@
 
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title">Order: @Model.Title <span class="badge bg-primary rounded-pill">$@Model.Price</span></h5>
-      <p class="card-text">@Model.Description</p>
+      <h5 class="card-title">Order: @Model["order"].Title <span
+          class="badge bg-primary rounded-pill">$@Model["order"].Price</span></h5>
+      <p class="card-text">@Model["order"].Description</p>
       <div class="mb-3">
-        <form action="/vendors/@Model.vendorId/orders/@Model.Id/delete" method="post">
-          <button class="btn btn-danger">Delete Order</button>
+        <form action='/vendors/@Model["vendor"].Id/orders/@Model["order"].Id/delete' method="post">
+          <button type="submit" class="btn btn-danger">Delete Order</button>
         </form>
       </div>
 </body>

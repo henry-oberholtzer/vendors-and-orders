@@ -14,7 +14,7 @@ public class VendorsController : Controller
   [HttpGet("/vendors/new")]
   public ActionResult New()
   {
-  return View();
+    return View();
   }
 
   [HttpPost("/vendors")]
@@ -22,8 +22,8 @@ public class VendorsController : Controller
   {
 
     Vendor newVendor = new(name, description);
-    RouteValueDictionary route = new(){{"id", newVendor.Id}};
-    return RedirectToAction("Show", route);  
+    RouteValueDictionary route = new() { { "id", newVendor.Id } };
+    return RedirectToAction("Show", route);
   }
 
   [HttpGet("/vendors/{id}")]
@@ -38,5 +38,14 @@ public class VendorsController : Controller
   {
     Vendor.Delete(id);
     return RedirectToAction("Index");
+  }
+
+  [HttpPost("/vendors/{vendorId}/orders")]
+  public ActionResult Create(int vendorId, string title, string price, string description)
+  {
+    Order newOrder = new(title, int.Parse(price), description);
+    Vendor target = Vendor.Find(vendorId);
+    target.AddOrder(newOrder);
+    return View("Show", target);
   }
 }

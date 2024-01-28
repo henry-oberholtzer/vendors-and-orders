@@ -7,7 +7,7 @@
 <body>
   @using VendorTracker.Models;
   <ol class="list-group list-group-numbered">
-    @if (Model.Orders.Count == 0)
+    @if (Model.Count == 0)
     {
 
       <a href="/vendors/new"
@@ -20,7 +20,7 @@
     }
     else
     {
-      @foreach (Order order in Model.Orders)
+      @foreach (Order order in Model)
       {
         <a href="/vendors/@order.Id"
           class="list-group-item d-flex justify-content-between align-items-start list-group-item-action">

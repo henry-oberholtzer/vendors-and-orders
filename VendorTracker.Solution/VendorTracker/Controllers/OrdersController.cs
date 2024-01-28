@@ -6,10 +6,11 @@ namespace VendorTracker.Controllers;
 public class OrdersController : Controller
 {
   [HttpGet("/vendors/{vendorId}/orders")]
-    public ActionResult Index(int vendorId)
+  public ActionResult Index(int vendorId)
   {
     Vendor target = Vendor.Find(vendorId);
-    return View(target);
+    List<Order> orders = target.Orders;
+    return View(orders);
   }
 
   [HttpGet("/vendors/{id}/orders/new")]
@@ -18,35 +19,28 @@ public class OrdersController : Controller
     Vendor target = Vendor.Find(id);
     return View(target);
   }
-  [HttpPost("/vendors/{vendorId}/orders")]
-  public ActionResult Create(int vendorId, string title, string price, string description)
+
+  [HttpGet("/vendors/{vendorId}/orders/{orderId}")]
+  public ActionResult Show(int vendorId, int orderId)
   {
-    string titleClean = title.Trim();
-    if(int.TryParse(price, out int priceNum) && titleClean.Length > 0)
+    Order order = Order.Find(orderId);
+    Vendor vendor = Vendor.Find(vendorId);
+    Dictionary<string, object> model = new()
     {
-          Order newOrder = new(titleClean, priceNum, description);
-          Vendor.Find(vendorId).AddOrder(newOrder);
-          RouteValueDictionary route = new(){
-            {"id", vendorId},
-            { "orderId", newOrder.Id}
-            };
-          return RedirectToAction("Show", route);
-    }
-    else
-    {
-      RouteValueDictionary route = new(){
-        {"id", vendorId},
-      };
-      return RedirectToAction("New", route);
-    }
+      {"order", order},
+      {"vendor", vendor},
+    };
+    return View(model);
   }
 
-  [HttpGet("/vendors/{id}/orders/{orderId}")]
-  public ActionResult Show(string id, int orderId)
+  [HttpPost("/vendors/{vendorId}/orders/{orderId}/delete")]
+  public ActionResult Delete(int vendorId, int orderId)
   {
-    Order targetOrder = Order.Find(orderId);
-    return View(targetOrder);
+    Vendor.Delete(orderId);
+    RouteValueDictionary route = new() { { "vendorId", vendorId } };
+    return RedirectToAction("Index", route);
   }
+
 
 };
 
