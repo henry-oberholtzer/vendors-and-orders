@@ -22,21 +22,21 @@ public class VendorsController : Controller
   {
 
     Vendor newVendor = new(name, description);
-    RouteValueDictionary route = new() { { "id", newVendor.Id } };
+    RouteValueDictionary route = new() { { "vendorId", newVendor.Id } };
     return RedirectToAction("Show", route);
   }
 
-  [HttpGet("/vendors/{id}")]
-  public ActionResult Show(int id)
+  [HttpGet("/vendors/{vendorId}")]
+  public ActionResult Show(int vendorId)
   {
-    Vendor target = Vendor.Find(id);
+    Vendor target = Vendor.Find(vendorId);
     return View(target);
   }
 
-  [HttpPost("/vendors/{id}/delete")]
-  public ActionResult Delete(int id)
+  [HttpPost("/vendors/{vendorId}/delete")]
+  public ActionResult Delete(int vendorId)
   {
-    Vendor.Delete(id);
+    Vendor.Delete(vendorId);
     return RedirectToAction("Index");
   }
 

@@ -31,6 +31,11 @@ public class Vendor
     Orders.Remove(orderToRemove);
   }
 
+  public void DeleteAllOrders()
+  {
+    Orders.Clear();
+  }
+
   public static List<Vendor> GetAll()
   {
     return _instances;

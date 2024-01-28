@@ -5,13 +5,6 @@ namespace VendorTracker.Controllers;
 
 public class OrdersController : Controller
 {
-  [HttpGet("/vendors/{vendorId}/orders")]
-  public ActionResult Index(int vendorId)
-  {
-    Vendor target = Vendor.Find(vendorId);
-    List<Order> orders = target.Orders;
-    return View(orders);
-  }
 
   [HttpGet("/vendors/{id}/orders/new")]
   public ActionResult New(int id)
@@ -36,9 +29,8 @@ public class OrdersController : Controller
   [HttpPost("/vendors/{vendorId}/orders/{orderId}/delete")]
   public ActionResult Delete(int vendorId, int orderId)
   {
-    Vendor.Delete(orderId);
-    RouteValueDictionary route = new() { { "vendorId", vendorId } };
-    return RedirectToAction("Index", route);
+    Vendor.Find(vendorId).DeleteOrder(orderId);
+    return RedirectPermanent("/vendors");
   }
 
 
