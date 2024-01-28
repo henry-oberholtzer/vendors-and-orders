@@ -5,15 +5,15 @@ public class Vendor
   public string Name { get; set; }
   public string Description { get; set; }
   public List<Order> Orders { get; set; }
-  public string Id { get; }
+  public int Id { get; }
   private static List<Vendor> _instances = new(){};
   public Vendor (string name, string description = "No description available.")
   {
     Name = name;
     Description = description;
-    _instances.Add(this);
     Orders = new List<Order>{};
-    Id = Guid.NewGuid().ToString();
+    Id = _instances.Count == 0 ? 1 : _instances.Last().Id + 1;
+    _instances.Add(this); 
   }
   public void AddOrder(Order order)
   {
@@ -21,7 +21,7 @@ public class Vendor
     Orders.Add(order);
   }
 
-  public Order FindOrder(string id)
+  public Order FindOrder(int id)
   {
     return Orders.Single(order => order.Id == id);
   }
@@ -34,9 +34,9 @@ public class Vendor
   {
     _instances.Clear();
   }
-  public static Vendor Find(string id)
+  public static Vendor Find(int id)
   {
-    return _instances.Single(vendor => vendor.Id == id);
+    return _instances.Find(vendor => vendor.Id == id);
   }
 
 
@@ -52,9 +52,9 @@ public class Vendor
     return results;
   }
 
-  public static void Delete(string id)
+  public static void Delete(int id)
   {
-    Vendor vendorToRemove = _instances.Single(vendor => vendor.Id == id);
+    Vendor vendorToRemove = _instances.Find(vendor => vendor.Id == id);
     _instances.Remove(vendorToRemove);
   }
 }

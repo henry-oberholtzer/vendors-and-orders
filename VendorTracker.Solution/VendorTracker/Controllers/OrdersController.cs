@@ -6,20 +6,20 @@ namespace VendorTracker.Controllers;
 public class OrdersController : Controller
 {
   [HttpGet("/vendors/{vendorId}/orders")]
-    public ActionResult Index(string vendorId)
+    public ActionResult Index(int vendorId)
   {
     Vendor target = Vendor.Find(vendorId);
     return View(target);
   }
 
   [HttpGet("/vendors/{id}/orders/new")]
-  public ActionResult New(string id)
+  public ActionResult New(int id)
   {
     Vendor target = Vendor.Find(id);
     return View(target);
   }
   [HttpPost("/vendors/{vendorId}/orders")]
-  public ActionResult Create(string vendorId, string title, string price, string description)
+  public ActionResult Create(int vendorId, string title, string price, string description)
   {
     string titleClean = title.Trim();
     if(int.TryParse(price, out int priceNum) && titleClean.Length > 0)
@@ -42,7 +42,7 @@ public class OrdersController : Controller
   }
 
   [HttpGet("/vendors/{id}/orders/{orderId}")]
-  public ActionResult Show(string id, string orderId)
+  public ActionResult Show(string id, int orderId)
   {
     Order targetOrder = Order.Find(orderId);
     return View(targetOrder);

@@ -5,17 +5,17 @@ public class Order {
   public string Description { get; set; }
   public int Price { get; set; }
 
-  public string VendorId { get; set; }
-  public string Id { get; }
+  public int? VendorId { get; set; }
+  public int Id { get; }
   private static List<Order> _instances = new (){};
   public Order(string title, int price, string description = "No description available.")
   {
     Title = title;
     Description = description;
     Price = price;
-    VendorId = "";
+    VendorId = null;
+    Id = _instances.Count == 0 ? 1 : _instances[^1].Id + 1;
     _instances.Add(this);
-    Id = Guid.NewGuid().ToString();
   }
   public static List<Order> GetAll()
   {
@@ -27,9 +27,9 @@ public class Order {
     _instances.Clear();
   }
 
-  public static Order Find(string id)
+  public static Order Find(int id)
   {
-    return _instances.Single(order => order.Id == id);
+    return _instances.Find(order => order.Id == id);
   }
 
   public static IEnumerable<Order> FindByTitle(string query)
@@ -38,9 +38,9 @@ public class Order {
     return results;
   }
 
-    public static void Delete(string id)
+    public static void Delete(int id)
   {
-    Order orderToRemove = _instances.Single(order => order.Id == id);
+    Order orderToRemove = _instances.Find(order => order.Id == id);
     _instances.Remove(orderToRemove);
   }
 }

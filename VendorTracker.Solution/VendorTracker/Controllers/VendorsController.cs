@@ -27,14 +27,14 @@ public class VendorsController : Controller
   }
 
   [HttpGet("/vendors/{id}")]
-  public ActionResult Show(string id)
+  public ActionResult Show(int id)
   {
     Vendor target = Vendor.Find(id);
     return View(target);
   }
 
   [HttpPost("/vendors/{id}/delete")]
-  public ActionResult Delete(string id)
+  public ActionResult Delete(int id)
   {
     Vendor.Delete(id);
     return RedirectToAction("Index");

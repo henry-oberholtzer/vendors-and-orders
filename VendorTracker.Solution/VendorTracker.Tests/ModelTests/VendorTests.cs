@@ -70,12 +70,12 @@ public class VendorTests : IDisposable
     CollectionAssert.AreEqual(expected, Vendor.GetAll());
   }
   [TestMethod]
-  public void Vendor_GetId_String()
+  public void Vendor_GetId_Int()
   {
     _ = new Vendor("one");
     Vendor two = new("two");
-    string expected = two.Id;
-    Assert.AreEqual(two.Id, expected);
+    int expected = 2;
+    Assert.AreEqual(expected, two.Id);
   }
   [TestMethod]
   public void Vendor_FindById_Vendor()
@@ -83,7 +83,7 @@ public class VendorTests : IDisposable
       _ = new Vendor("one");
       _ = new Vendor("two");
       Vendor three = new("three");
-      Assert.AreEqual(Vendor.Find(three.Id), three);
+      Assert.AreEqual(Vendor.Find(3), three);
 
   }
   [TestMethod]
@@ -92,7 +92,7 @@ public class VendorTests : IDisposable
       Vendor one = new("one");
       Vendor two = new("two");
       Vendor three = new("three");
-      string idToDelete = one.Id;
+      int idToDelete = 1;
       List<Vendor> expected = new(){ two, three };
       Vendor.Delete(idToDelete);
       CollectionAssert.AreEqual(Vendor.GetAll(), expected);
@@ -100,12 +100,12 @@ public class VendorTests : IDisposable
   [TestMethod]
   public void Vendor_DeleteAndFind_Vendor()
   {
-      Vendor one = new("one");
-      Vendor two = new("two");
-      Vendor three = new("three");
-      string id = two.Id.ToString();
+        _ = new Vendor("one");
+        _ = new Vendor("two");
+        Vendor three = new("three");
+      int id = 1;
       Vendor.Delete(id);
-      Assert.AreEqual(Vendor.Find(three.Id), three);
+      Assert.AreEqual(Vendor.Find(3), three);
   }
   [TestMethod]
   public void Vendor_DeleteAddGetAll_VendorList()
@@ -113,10 +113,10 @@ public class VendorTests : IDisposable
       Vendor one = new("one");
       Vendor two = new("two");
       Vendor three = new("three");
-      Vendor.Delete(three.Id);
+      Vendor.Delete(2);
       Vendor four = new("four");
-      Vendor.Delete(four.Id);
-      List<Vendor> expected = new(){one, two };
+      Vendor.Delete(4);
+      List<Vendor> expected = new(){one, three };
       CollectionAssert.AreEqual(expected, Vendor.GetAll());
   }
   [TestMethod]
